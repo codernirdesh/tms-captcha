@@ -12,6 +12,7 @@
     "@types/node": "^18.11.18",
     "buffer": "^5.5.0",
     "parcel": "^2.8.2",
+    "ts-node": "^10.9.2",
     "web-ext": "^8.4.0"
   },
   "dependencies": {
@@ -22,6 +23,13 @@
   "bin": {
     "tms-captcha": "./dist/cli.js"
   },
+  "main": "dist/js/index.js",
+  "types": "dist/js/index.d.ts",
+  "files": [
+    "dist/",
+    "src/assets/",
+    "src/data/"
+  ],
   "scripts": {
     "start:chrome": "parcel watch src/manifest.chrome.json --host localhost --config @parcel/config-webextension",
     "start:firefox": "parcel watch src/manifest.firefox.json --host localhost --config @parcel/config-webextension",
@@ -32,9 +40,9 @@
     "zip:chrome": "cd dist-chrome && web-ext build --overwrite-dest --artifacts-dir=../web-ext-artifacts",
     "zip:all": "yarn zip:chrome && yarn zip:firefox",
     "publish:firefox": "yarn build:firefox && yarn zip:firefox && cd dist-firefox && web-ext sign --api-key=$MOZILLA_JWT_ISSUER --api-secret=$MOZILLA_JWT_SECRET --channel=listed --artifacts-dir=../web-ext-artifacts",
-    "calibrate": "ts-node scripts/calibrate.ts",
+    "calibrate": "ts-node src/scripts/calibrate.ts",
     "test": "ts-node scripts/test.ts",
-    "build": "tsc"
+    "build": "rm -rf dist && tsc && cp -r src/assets dist/assets && cp -r src/data dist/data"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

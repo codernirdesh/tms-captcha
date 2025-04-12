@@ -1,4 +1,5 @@
 import {Image} from "image-js";
+import { BASE_PATH } from "./config";
 
 import DATA_BOLD from "./data/bold_data.json"
 import DATA_SLIM from "./data/slim_data.json"
@@ -8,9 +9,8 @@ let EMPTY = "";
 let DATA_PATH = "";
 
 if (typeof process !== "undefined" && process.env.NODE_ENV === "node") {
-  // Node.js environment
-  EMPTY = "path/to/empty.png"; // Replace with actual path
-  DATA_PATH = "path/to/data.json"; // Replace with actual path
+  EMPTY = `${BASE_PATH}/assets/empty.jpg`;
+  DATA_PATH = `${BASE_PATH}/data`;
 } else if (typeof browser !== "undefined") {
   // Firefox extension
   EMPTY = browser.runtime.getURL("empty.png");
