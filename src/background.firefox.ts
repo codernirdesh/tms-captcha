@@ -2,6 +2,8 @@
 // This script is required for Firefox manifest v2 compatibility
 // It handles browser extension lifecycle events
 
-browser.runtime.onInstalled.addListener(() => {
-  console.log('TMSCaptcha extension installed');
-});
+if (typeof browser !== "undefined") {
+  browser.runtime.onInstalled.addListener(() => {
+    console.log("Extension installed");
+  });
+}

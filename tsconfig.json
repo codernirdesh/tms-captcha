@@ -6,11 +6,12 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist/js",
     "noEmitOnError": true,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "skipLibCheck": true,
   }
 }

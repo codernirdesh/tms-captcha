@@ -4,22 +4,21 @@ import DATA_BOLD from "./data/bold_data.json"
 import DATA_SLIM from "./data/slim_data.json"
 import {ResultTypes, SolveResult} from "./interface";
 
-let EMPTY = "assets/empty.jpg";
-let DATA_PATH = "data";
+let EMPTY = "";
+let DATA_PATH = "";
 
-if (typeof window === "object") {
-  if (typeof browser !== "undefined") {
-    // Firefox
-    EMPTY = browser.runtime.getURL(EMPTY);
-    DATA_PATH = browser.runtime.getURL(DATA_PATH);
-  } else {
-    // Chrome
-    EMPTY = chrome.runtime.getURL(EMPTY);
-    DATA_PATH = chrome.runtime.getURL(DATA_PATH);
-  }
-} else {
-  EMPTY = `./src/${EMPTY}`;
-  DATA_PATH = `./src/${DATA_PATH}`;
+if (typeof process !== "undefined" && process.env.NODE_ENV === "node") {
+  // Node.js environment
+  EMPTY = "path/to/empty.png"; // Replace with actual path
+  DATA_PATH = "path/to/data.json"; // Replace with actual path
+} else if (typeof browser !== "undefined") {
+  // Firefox extension
+  EMPTY = browser.runtime.getURL("empty.png");
+  DATA_PATH = browser.runtime.getURL("data.json");
+} else if (typeof chrome !== "undefined") {
+  // Chrome extension
+  EMPTY = chrome.runtime.getURL("empty.png");
+  DATA_PATH = chrome.runtime.getURL("data.json");
 }
 
 const FACTORS = [ 1, 3, 2, 8, 3 ];
